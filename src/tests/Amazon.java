@@ -20,7 +20,6 @@ public class Amazon {
     @Before
     public void setup(){
         driver = new AmazonTestDriver();
-        driver.milliSleep(250);
     }
 
     @After
@@ -31,7 +30,9 @@ public class Amazon {
     @Test
     public void testNewUserRegistrationNoUsername(){
 
-        driver.click("id=nav-link-yourAccount");
+        if(!driver.click("id=nav-link-yourAccount")) {
+            driver.click("id=nav-link-accountList");
+        }
         driver.click("id=createAccountSubmit");
 
         driver.sendKeys("id=continue", "test");
@@ -47,7 +48,9 @@ public class Amazon {
     @Test
     public void testNewUserRegistrationNoEmail(){
 
-        driver.click("id=nav-link-yourAccount");
+        if(!driver.click("id=nav-link-yourAccount")) {
+            driver.click("id=nav-link-accountList");
+        }
         driver.click("id=createAccountSubmit");
 
         driver.sendKeys("id=ap_customer_name", "test");
@@ -62,7 +65,9 @@ public class Amazon {
     @Test
     public void testNewUserRegistrationMisMatchedPasswords(){
 
-        driver.click("id=nav-link-yourAccount");
+        if(!driver.click("id=nav-link-yourAccount")) {
+            driver.click("id=nav-link-accountList");
+        }
         driver.click("id=createAccountSubmit");
 
         driver.sendKeys("id=ap_customer_name", "test");
@@ -78,7 +83,9 @@ public class Amazon {
     @Test
     public void testNewUserRegistrationShortPassword(){
 
-        driver.click("id=nav-link-yourAccount");
+        if(!driver.click("id=nav-link-yourAccount")) {
+            driver.click("id=nav-link-accountList");
+        }
         driver.click("id=createAccountSubmit");
 
         driver.sendKeys("id=ap_customer_name", "test");

@@ -55,7 +55,7 @@ public class Automato {
 			return false;
 		}
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		return true;
 	}
@@ -83,7 +83,7 @@ public class Automato {
 	
 	public boolean click(By by){
 		try{
-			WebElement element = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(by));
+			WebElement element = (new WebDriverWait(driver, 5)).until(ExpectedConditions.presenceOfElementLocated(by));
 			element.click();
 			return true;
 		} catch (StaleElementReferenceException e){
@@ -275,16 +275,23 @@ public class Automato {
 	}
 
 	public boolean waitUntilPresent(By element){
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(element));
-		return false;
+		WebDriverWait wait = new WebDriverWait(driver, 5);
+		try{
+			wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public boolean waitUntilAllPresent(By element){
-		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(element));
-		return false;
-
+		WebDriverWait wait = new WebDriverWait(driver, 5);
+		try{
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(element));
+			return true;
+		} catch (Exception e){
+			return false;
+		}
 	}
 	//END OF IMPLICIT WAIT BLOCK
 	/**
